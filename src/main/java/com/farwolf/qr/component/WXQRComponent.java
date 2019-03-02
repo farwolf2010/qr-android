@@ -1,8 +1,12 @@
 package com.farwolf.qr.component;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.farwolf.perssion.Perssion;
+import com.farwolf.perssion.PerssionCallback;
 import com.farwolf.qr.view.QRView;
 import com.farwolf.weex.annotation.WeexComponent;
 import com.taobao.weex.WXSDKInstance;
@@ -33,10 +37,32 @@ public class WXQRComponent extends WXComponent<QRView> {
 
     @JSMethod
     public void scan(JSCallback callback){
-        QRView qrView=getHostView();
+        final QRView qrView=getHostView();
         qrView.callback=callback;
         this.callback=callback;
-        qrView.start();
+
+
+        Perssion.check((Activity) getContext(), Manifest.permission.CAMERA,new PerssionCallback(){
+
+
+            @Override
+            public void onGranted() {
+
+
+                Perssion.check((Activity)getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE , new PerssionCallback() {
+                    @Override
+                    public void onGranted() {
+                        qrView.start();
+
+                    }
+                });
+
+
+
+            }
+        });
+
+
 //        qrView.setVisibility(View.VISIBLE);
 
     }
