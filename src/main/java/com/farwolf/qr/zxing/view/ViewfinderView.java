@@ -57,7 +57,7 @@ public final class ViewfinderView extends View {
     private CameraManager cameraManager;
     private final Paint paint;
     private Bitmap resultBitmap;
-    private final int maskColor; // 取景框外的背景颜色
+    public   int maskColor; // 取景框外的背景颜色
     private final int resultColor;// result Bitmap的颜色
     private final int laserColor; // 红色扫描线的颜色
     private final int resultPointColor; // 特征点的颜色
@@ -131,7 +131,7 @@ public final class ViewfinderView extends View {
             // Draw a red "laser scanner" line through the middle to show
             // decoding is active
             drawFrameBounds(canvas, frame);
-            drawStatusText(canvas, frame, width);
+//            drawStatusText(canvas, frame, width);
 
             // 绘制扫描线
             // paint.setColor(laserColor);

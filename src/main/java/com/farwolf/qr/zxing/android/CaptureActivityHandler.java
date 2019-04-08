@@ -99,6 +99,18 @@ public final class CaptureActivityHandler extends Handler {
 						.getFloat(DecodeThread.BARCODE_SCALED_FACTOR);
 			}
 			qrView.handleDecode((Result) message.obj, barcode, scaleFactor);
+
+
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					state = State.PREVIEW;
+					cameraManager.requestPreviewFrame(decodeThread.getHandler(),
+							R.id.decode);
+				}
+			}, 1500);
+
 		}
 		else if(v== R.id.decode_failed) {
 

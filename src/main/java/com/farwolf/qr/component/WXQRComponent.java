@@ -16,6 +16,8 @@ import com.taobao.weex.ui.action.BasicComponentData;
 import com.taobao.weex.ui.component.WXComponent;
 import com.taobao.weex.ui.component.WXVContainer;
 
+import java.util.HashMap;
+
 
 @WeexComponent(name="qr")
 public class WXQRComponent extends WXComponent<QRView> {
@@ -91,6 +93,18 @@ public class WXQRComponent extends WXComponent<QRView> {
     @Override
     public void onActivityDestroy() {
         super.onActivityDestroy();
-        getHostView().onDestroy();
+//        getHostView().onDestroy();
     }
+
+    @JSMethod
+    public void setScanArea(HashMap map){
+      int width=map.containsKey("width")?Integer.parseInt(map.get("width")+""):0;
+      int height=map.containsKey("height")?Integer.parseInt(map.get("height")+""):0;
+      int alph=map.containsKey("alph")?Integer.parseInt(map.get("alph")+""):0;
+      String color =map.containsKey("color")? map.get("color")+"":"";
+      getHostView().setScanArea(width,height,alph,color);
+    }
+
+
+//    setScanArea
 }

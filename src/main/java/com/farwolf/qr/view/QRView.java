@@ -3,6 +3,7 @@ package com.farwolf.qr.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.farwolf.qr.R;
 import com.farwolf.qr.zxing.android.BeepManager;
@@ -23,6 +25,7 @@ import com.farwolf.qr.zxing.camera.CameraManager;
 import com.farwolf.qr.zxing.view.ViewfinderView;
 import com.farwolf.qrcode.zxing.android.CaptureActivity;
 import com.farwolf.weex.app.WeexApplication;
+import com.farwolf.weex.util.Weex;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
@@ -132,6 +135,18 @@ public class QRView  extends LinearLayout implements
         }
     }
 
+    public void setScanArea(int width,int height,int alph,String color)
+    {
+        width= (int)Weex.length(width);
+        height= (int)Weex.length(height);
+        RelativeLayout.LayoutParams l=new RelativeLayout.LayoutParams(width,height);
+        l.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+        int c=Color.parseColor(color);
+        viewfinderView.maskColor=Color.argb( (int)(((float)alph)/100*255),Color.red(c),Color.green(c),Color.blue(c));
+        viewfinderView.setLayoutParams(l);
+        viewfinderView.invalidate();
+    }
 
 
 
@@ -195,6 +210,7 @@ public class QRView  extends LinearLayout implements
 
 
     public void onDestroy() {
+        if(inactivityTimer!=null)
         inactivityTimer.shutdown();
 
     }
