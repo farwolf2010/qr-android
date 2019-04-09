@@ -44,14 +44,14 @@ public class WXQRComponent extends WXComponent<QRView> {
         this.callback=callback;
 
 
-        Perssion.check((Activity) getContext(), Manifest.permission.CAMERA,new PerssionCallback(){
+        Perssion.check((Activity) mInstance.getContext(), Manifest.permission.CAMERA,new PerssionCallback(){
 
 
             @Override
             public void onGranted() {
 
 
-                Perssion.check((Activity)getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE , new PerssionCallback() {
+                Perssion.check((Activity)mInstance.getContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE , new PerssionCallback() {
                     @Override
                     public void onGranted() {
                         qrView.start();
