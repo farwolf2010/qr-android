@@ -145,6 +145,7 @@ public class QRView  extends LinearLayout implements
         int c=Color.parseColor(color);
         viewfinderView.maskColor=Color.argb( (int)(((float)alph)/100*255),Color.red(c),Color.green(c),Color.blue(c));
         viewfinderView.setLayoutParams(l);
+        viewfinderView.setBackgroundColor(viewfinderView.maskColor);
         viewfinderView.invalidate();
     }
 
